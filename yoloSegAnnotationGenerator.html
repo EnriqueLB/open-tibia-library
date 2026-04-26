@@ -1,0 +1,43 @@
+<html>
+<head>
+    <title>YOLO Segmentation Annotation Generator - OpenTibiaLibrary</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+</head>
+<body>
+<h2>YOLO segmentation annotation generator</h2>
+<blockquote>
+    How to use:<br/><br/>
+    1. Select a folder with PNG sprites or sprite sheets.<br/>
+    2. Optionally change dataset name, alpha threshold and grid size.<br/>
+    3. Click "GENERATE DATASET" and wait for ZIP download.<br/>
+    <br/>
+    The generator splits multi-frame PNGs using OpenTibiaLibrary PNG metadata when available,
+    then auto-detects the crop from PNG height: 32->32x32, 64->64x64, 128->128x128.
+    Manual grid selection is still available for special cases.<br/>
+    <br/>
+    Output ZIP contains YOLO-seg labels, cropped training images, classes list and dataset metadata.<br/>
+    <br/>
+    <b>FILES ARE NOT SEND TO SERVER! EVERYTHING IS GENERATED ON YOUR COMPUTER.</b><br/>
+</blockquote>
+Dataset Name: <input type="text" id="datasetName" value="outfit_yolo_seg"/><br/>
+PNG Folder: <input type="file" id="sourceFolder" webkitdirectory directory multiple accept=".png,image/png"/><br/>
+Alpha Threshold: <input type="number" id="alphaThreshold" value="1" min="0" max="254"/> (pixels above this alpha are considered part of the object)<br/>
+Validation Split: <input type="number" id="validationSplit" value="20" min="0" max="50"/> (%)<br/>
+Grid Size:
+<select id="gridSize">
+    <option value="auto" selected>Auto</option>
+    <option value="32x32">32x32</option>
+    <option value="64x64">64x64</option>
+    <option value="128x64">128x64</option>
+    <option value="128x128">128x128</option>
+</select><br/>
+Crop Transparent Margins: <input type="checkbox" id="cropTransparentMargins" checked/><br/>
+<br/>
+<button id="generateDataset">GENERATE DATASET</button>
+<br/>
+<br/>
+<b>Progress:</b> <span id="progressBar">Not running</span><br/>
+<script src="js/vendor.js"></script>
+<script src="js/yoloSegAnnotationGenerator.js"></script>
+</body>
+</html>
